@@ -1,0 +1,99 @@
+<script type="text/javascript" src="/SiteAssets/pnp-ww.js"></script>
+<script type="text/javascript" src="/SiteAssets/mycomponentvisible.js"></script>
+
+    <script type="text/babel">
+     var Commentsmodule = Commentsmodule || {};
+Commentsmodule.Load = function () {
+        var comment=React.createClass({
+                                render()
+                                {
+                                    return (<div className="comment">
+                          <div className="leftcol">
+                                <a><img src={this.props.item.ImageUrl}/></a>
+                          </div>
+                          <div className="rightcol">
+                            <p className="name"><a>{this.props.item.UserName}</a></p>
+                            <p className="datetime">{this.props.item.Date}</p>
+                            <p className="response">{this.props.item.Message}</p>
+                          </div>
+                        </div>     
+                                )
+                            }
+        });
+
+        var Comments=React.createClass(
+            {
+               
+        getInitialState()
+        {
+        return {
+        CommentData:[{ "ImageUrl": "/Style Library/mindef/img/face_1.jpg", "UserName": "Xavier Tan", "Date": "19 Nov 2016 @ 11.20am", "Message": "I like this good article" }, { "ImageUrl": "/Style Library/mindef/img/face_2.jpg", "UserName": "Geraldine Wee", "Date":"19 Nov 2016 @ 2.45pm", "Message": "Interesting!" },{ "ImageUrl": "/Style Library/mindef/img/face_3.jpg", "UserName": "Huang Xiao Ming", "Date": "20 Nov 2016 @ 9.00am", "Message": "testing" }, { "ImageUrl": "/Style Library/mindef/img/face_4.jpg", "UserName": "Xavier Tan", "Date": "29 Nov 2016 @ 11.20am", "Message": "working" }]}
+        },
+        retrieveFromWebService()
+        {
+            var that=this;
+            var url="/SiteAssets/Comments/comment.js"
+           var promise = $.ajax({
+                  type: 'GET',
+                  url: url,
+
+                  contentType: "application/json; charset=utf-8",
+                  dataType: "json",
+                });
+       promise.then(successFunction,errorFunction); 
+       function successFunction(data){
+        console.log("working")
+        that.setState({ CommentData:  JSON.parse(data.d) });
+       }   
+    function errorFunction(jqXHR, textStatus){
+           console.log("Request failed: " + textStatus );
+          throw new Error("Bad response from server");
+            }   
+
+        },
+
+  componentDidMount()
+  
+  {
+         this.retrieveFromWebService();
+  },
+            comments()
+        {
+            return this.state.CommentData.map((comment,index) => (
+                <Comment item={comment}  key={index} />
+            ));  
+        },
+                render()
+                {
+                    return (    <div className="commentbox">
+                        <div className="leavecomment">
+                          <label>Leave a comment</label>
+                        </div>
+                        <div className="comment leavecomment form-group">
+                          <div className="leftcol">
+                            <a><img src="/Style Library/mindef/img/face_3.jpg" /></a>
+                          </div>
+                          <div className="rightcol">
+                            <textarea className="form-control leavecommentarea" rows="5"></textarea>
+                            <button type="submit" className="btn btn-default leavecommentbutton">Comment</button>
+                          </div>
+                        </div>
+                   {this.comments()}
+                      </div>
+
+                           )
+                }
+    });
+
+
+ReactDOM.render(<Comments />,document.getElementById('Comments')); 
+}
+Commentsmodule.Load();
+
+        </script>
+
+
+    <div id="Comments">      
+    </div>
+
+    

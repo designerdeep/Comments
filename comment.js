@@ -1,0 +1,2 @@
+[{ "ImageUrl": "/Style Library/mindef/img/face_1.jpg", "UserName": "Xavier Tan", "Date": "19 Nov 2016 @ 11.20am", "Message": "I like this good article" }, { "ImageUrl": "/Style Library/mindef/img/face_2.jpg", "UserName": "Geraldine Wee", "Date":"19 Nov 2016 @ 2.45pm", "Message": "Interesting!" }, 
+{ "ImageUrl": "/Style Library/mindef/img/face_3.jpg", "UserName": "Huang Xiao Ming", "Date": "20 Nov 2016 @ 9.00am", "Message": "testing" }, { "ImageUrl": "/Style Library/mindef/img/face_4.jpg", "UserName": "Xavier Tan", "Date": "29 Nov 2016 @ 11.20am", "Message": "working" }]
